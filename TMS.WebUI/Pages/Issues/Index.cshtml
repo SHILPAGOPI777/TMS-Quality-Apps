@@ -1,0 +1,44 @@
+﻿@page
+@model TMS.WebUI.Issues.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <span>Issues</span>
+</div>
+
+<h1>Issues</h1>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Assignee</th>
+        <th>Reporter</th>
+        <th>Priority</th>
+        <th>Status</th>
+    </tr>
+    @if (Model.IssueCatalog != null && Model.IssueCatalog.Count > 0)
+    {
+        foreach (var category in Model.IssueCatalog)
+        {
+            @if (category.Value != null && category.Value.Count() > 0)
+            {
+                <tr><td class="font-weight-bold text-center" colspan="5">@category.Key</td></tr>
+                foreach (var issue in category.Value)
+                {
+                    <tr>
+                        <td><a asp-page="Detailed" asp-route-id="@issue.Id">@issue.Name</a></td>
+                        <td>@issue.AssigneeName</td>
+                        <td>@issue.ReporterName</td>
+                        <td class="task-priority-@issue.PriorityName">@issue.PriorityName</td>
+                        <td class="task-status-@issue.StatusName">@issue.StatusName</td>
+                    </tr>
+                }
+            }
+        }
+    }
+</table>
+<a class="btn task-add noselect" asp-page="Create">New issue</a>
