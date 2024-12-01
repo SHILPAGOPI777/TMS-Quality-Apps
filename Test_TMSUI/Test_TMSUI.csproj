@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Application\TMS_2.Application.csproj" />
+    <ProjectReference Include="..\TMS.Domain\TMS_1.Domain.csproj" />
+    <ProjectReference Include="..\TMS.Infrastructure\TMS_4.Infrastructure.csproj" />
+    <ProjectReference Include="..\TMS.Persistence\TMS_3.Persistence.csproj" />
+    <ProjectReference Include="..\TMS.WebUI\TMS_5.WebUI.csproj" />
+  </ItemGroup>
+
+</Project>

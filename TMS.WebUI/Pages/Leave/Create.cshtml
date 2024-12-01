@@ -1,0 +1,121 @@
+﻿@page
+@using TMS.WebUI.Common;
+@model TMS.WebUI.Leaves.CreateModel
+@{
+    ViewData["Title"] = "Apply Leave";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: #181a1b;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #3f678f;
+        margin-bottom: 20px;
+    }
+
+    .formcls {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        color: #495057;
+        border: 1px solid #b7c1cb;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        background-color: #f8f9fa;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-control:focus {
+            border-color: #3f678f;
+            outline: none;
+            box-shadow: 0 0 4px rgba(63, 103, 143, 0.5);
+        }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .btn-primary {
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        border: none;
+        display: inline-block;
+    }
+
+        .btn-primary:hover {
+            background-color: #004d99;
+        }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Leaves</a> >
+    <span>Apply Leave</span>
+</div>
+
+<h1>Apply Leave</h1>
+
+<form class="formcls" asp-page="Create" method="post">
+    <div>
+        <label asp-for="Leave.LeaveType" class="control-label">Leave Type</label>
+        <select name="LeaveType" asp-for="Leave.LeaveType" class="form-control" >
+            <option value="">--Select--</option>
+            <option value="Casual">Casual</option>
+            <option value="Sick">Sick</option>
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="Leave.StartDate" class="control-label">From Date</label>
+        <input name="StartDate" type="date" asp-for="Leave.StartDate" class="form-control"  value="@Model.Leave.StartDate"/>
+    </div>
+
+    <div>
+        <label asp-for="Leave.EndDate" class="control-label">To Date</label>
+        <input name="EndDate" type="date" asp-for="Leave.EndDate" class="form-control"  value="@Model.Leave.EndDate"/>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Create" />
+</form>

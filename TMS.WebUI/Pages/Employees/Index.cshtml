@@ -1,0 +1,123 @@
+﻿@page
+@model TMS.WebUI.Employees.IndexModel
+@{ ViewData["Title"] = "All Employees"; }
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+
+
+    .btn:hover {
+        background-color: #004d99;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    table.table {
+        width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .table th, .table td {
+        border: 1px solid #b7c1cb;
+        padding: 15px;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .table th {
+        background-color: #3f678f;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+
+    .table a {
+        color: #181a1b;
+        text-decoration: none;
+    }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+    .btn {
+        display: inline-block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+
+    .divwidth {
+        float: left;
+        width: 100%;
+    }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <span>Employee List</span>
+</div>
+
+<h1 style="color: #3f678f">Employees</h1>
+
+<div class="divwidth">
+    @if (User.IsInRole("Admin"))
+    {<a class="btn" asp-page="Create"  style="float: right; background: #3f678f; color: #ffffff;">Add New Employee</a>} 
+    <table class="table">
+        <tr>
+            <th>Full Name</th>
+            <th>Short Name</th>
+
+            <th>Role</th>
+        </tr>
+        @foreach (var item in Model.Employees)
+        {
+    <tr>
+
+        <td><a asp-page="Detailed" asp-route-id="@item.Id">@item.FullName</a></td>
+        <td>@item.ShortName</td>
+        <td>@item.RoleName</td>
+    </tr>}
+    </table>
+</div>
+
+

@@ -1,0 +1,134 @@
+﻿@page
+@using TMS.WebUI.Common;
+@model TMS.WebUI.Issues.CreateModel
+@{
+    ViewData["Title"] = "Create New Task";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+
+
+    .btn:hover {
+        background-color: #004d99;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .clsform {
+        background-color: #001f4d; /* Slightly darker blue for form background */
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .control-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-control, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #004d99;
+        border-radius: 5px;
+        background-color: #003366;
+        color: white;
+    }
+
+        .form-control:focus, select:focus {
+            outline: none;
+            border-color: #87CEFA;
+            box-shadow: 0 0 5px #87CEFA;
+        }
+
+    .text-danger {
+        color: #FF6347; /* Red for error messages */
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Issues</a> >
+    <span>Add issue</span>
+</div>
+
+<h1 style="color: #3f678f">Add Issue</h1>
+
+<form asp-page="Create" method="post" class="clsform">
+    <div>
+        <label asp-for="Issue.Name" class="control-label"></label>
+        <input name="Name" asp-for="Issue.Name" class="form-control" value="@Model.Issue.Name" />
+        <span asp-validation-for="Issue.Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Issue.Description" class="control-label"></label>
+        <input name="Description" asp-for="Issue.Description" class="form-control" value="@Model.Issue.Description" />
+    </div>
+    <div>
+        <label asp-for="Issue.AssigneeId" class="control-label"></label>
+        <select name="AssigneeId" asp-for="Issue.AssigneeId" asp-items="@Model.Issue.Employees.ToSelectList(Model.Issue.AssigneeId)" class="form-control"></select>
+    </div>
+    <div>
+        <label asp-for="Issue.ReporterId" class="control-label"></label>
+        <select name="ReporterId" asp-for="Issue.ReporterId" asp-items="@Model.Issue.Employees.ToSelectList(Model.Issue.ReporterId)" class="form-control"></select>
+    </div>
+    <div>
+        <label asp-for="Issue.Priority" class="control-label"></label>
+        <select name="Priority" asp-for="Issue.Priority" asp-items="@Model.Issue.IssuePriorityLevels.ToSelectList(Model.Issue.Priority)" class="form-control"></select>
+    </div>
+    <div>
+        <label asp-for="Issue.Status" class="control-label"></label>
+        <select name="Status" asp-for="Issue.Status" asp-items="@Model.Issue.IssueStatuses.ToSelectList(Model.Issue.Status)" class="form-control"></select>
+    </div>
+    <input class="btn" type="submit" value="Create" />
+</form>

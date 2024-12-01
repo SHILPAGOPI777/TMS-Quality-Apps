@@ -1,0 +1,181 @@
+﻿@page
+@model TMS.WebUI.Leaves.IndexModel
+
+@{
+    ViewData["Title"] = "Leaves";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #3f678f;
+    }
+
+    .table {
+        width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        background-color: white;
+    }
+
+        .table th, .table td {
+            border: 1px solid #b7c1cb;
+            padding: 15px;
+            text-align: left;
+            font-size: 1rem;
+            color: #181a1b;
+        }
+
+        .table th {
+            background-color: #3f678f;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .table a {
+            color: #181a1b;
+            text-decoration: none;
+        }
+
+            .table a:hover {
+                text-decoration: underline;
+            }
+
+        .table .badge {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+    .task-priority-approved {
+        background-color: #28a745; /* Green */
+        color: white;
+    }
+
+    .task-priority-pending {
+        background-color: #ffc107; /* Yellow */
+        color: black;
+    }
+
+    .task-priority-rejected {
+        background-color: #dc3545; /* Red */
+        color: white;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+
+    .text-end {
+        text-align: right;
+    }
+
+    .no-records {
+        text-align: center;
+        color: #7a7a7a;
+        font-size: 1rem;
+    }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <span>Leaves</span>
+</div>
+
+<h1>Leaves</h1>
+
+<div class="divwidth">
+    <div class="text-end">
+        <a class="btn" asp-page="Create">Apply A Leave</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Employee</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.LeavesCatalog != null && Model.LeavesCatalog.Count > 0)
+            {
+                foreach (var category in Model.LeavesCatalog)
+                {
+                    if (category.Value != null && category.Value.Count() > 0)
+                    {
+                        <tr class="table-secondary">
+                            <td class="font-weight-bold text-center" colspan="5">@category.Key</td>
+                        </tr>
+                        foreach (var leave in category.Value)
+                        {
+        <tr>
+            <td>
+                <a asp-page="Detailed" asp-route-id="@leave.LeaveId">@leave.LeaveType</a>
+            </td>
+            <td>@leave.StartDate.ToString("dd MMM yyyy")</td>
+            <td>@leave.EndDate.ToString("dd MMM yyyy")</td>
+            <td>
+                @leave.AssigneeName
+            </td>
+            <td>
+                <span class="badge task-priority-@leave.Status.ToLower()">
+                    @leave.Status
+                </span>
+            </td>
+
+        </tr>
+                        }
+                    }
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="no-records">No leave records available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>

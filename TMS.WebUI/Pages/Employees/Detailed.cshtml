@@ -1,0 +1,123 @@
+﻿@page
+@model TMS.WebUI.Employees.DetailedModel
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+
+
+    .btn:hover {
+        background-color: #004d99;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .details-container {
+        background-color: #001f4d; /* Slightly darker blue for contrast */
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+        table tr:first-child td {
+            font-weight: bold;
+            border-bottom: 2px solid #4CAF50; /* Green line separator */
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #87CEFA; /* Light blue border */
+            text-align: left;
+        }
+
+            table td:first-child {
+                width: 30%;
+            }
+
+    .btn {
+        display: block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        text-align: center;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Employees</a> >
+    <span>@Model.Employee.FullName</span>
+</div>
+
+<h1 style="color: #3f678f">Employee Details</h1>
+
+<div class="details-container">
+    <h2>@Model.Employee.FullName</h2>
+    <p>Below are the details for the selected employee:</p>
+
+    <table>
+        <tr>
+            <td>Short Name:</td>
+            <td>@Model.Employee.ShortName</td>
+        </tr>
+        <tr>
+            <td>Full Name:</td>
+            <td>@Model.Employee.FullName</td>
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td>@Model.Employee.RoleName</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>@Model.Employee.Email</td>
+        </tr>
+    </table>
+
+    <a class="btn" asp-page="Edit" asp-route-id="@Model.Employee.Id">Edit Employee</a>
+</div>

@@ -1,0 +1,138 @@
+﻿@page
+@using TMS.WebUI.Common
+@model TMS.WebUI.Leaves.EditModel
+@{
+    ViewData["Title"] = "Approve Leave";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        margin-bottom: 20px;
+    }
+
+        .breadcrumbs a {
+            color: #87CEFA; /* Light blue links */
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: white;
+        }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .clsform {
+        margin-bottom: 20px;
+        background-color: #001f4d;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group span {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+    .btn {
+        display: inline-block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+
+    .btn-remove {
+        background-color: #cc0000; /* Red for delete */
+    }
+
+        .btn-remove:hover {
+            background-color: #990000;
+        }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Issues</a> >
+    <span>@Model.Leave.AssigneeName</span>
+</div>
+
+<h1>Approve Leave: @Model.Leave.AssigneeName</h1>
+
+<form class="clsform" method="post">
+    <div class="form-group">
+        <label asp-for="Leave.LeaveType" class="control-label">Leave Type</label>
+        <select asp-for="Leave.LeaveType" class="form-control">
+            <option value="">--Select--</option>
+            <option value="Casual">Casual</option>
+            <option value="Sick">Sick</option>
+        </select>
+        <span asp-validation-for="Leave.LeaveType"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Leave.StartDate" class="control-label">From Date</label>
+        <input type="date" asp-for="Leave.StartDate" class="form-control" />
+        <span asp-validation-for="Leave.StartDate"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Leave.EndDate" class="control-label">To Date</label>
+        <input type="date" asp-for="Leave.EndDate" class="form-control" />
+        <span asp-validation-for="Leave.EndDate"></span>
+    </div>
+
+    <input type="hidden" asp-for="Leave.EmployeeId" />
+    <input type="hidden" asp-for="Leave.LeaveId" />
+@if (Model.Leave.Status == "Pending")
+{
+    <input class="btn" type="submit" value="Approve" />
+}
+</form>
+
+<form method="post" asp-page-handler="Delete">
+    <input type="hidden" asp-for="Leave.LeaveId" />
+    <input class="btn btn-remove" type="submit" value="Remove" />
+</form>
+

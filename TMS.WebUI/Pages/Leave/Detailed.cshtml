@@ -1,0 +1,122 @@
+﻿@page
+@model TMS.WebUI.Leaves.DetailedModel
+@{
+    ViewData["Title"] = "Leave Details";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #3f678f;
+    }
+
+    .details-container {
+        background-color: #001f4d;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+        table tr:first-child td {
+            font-weight: bold;
+            border-bottom: 2px solid #4CAF50;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #87CEFA;
+            text-align: left;
+        }
+
+            table td:first-child {
+                width: 30%;
+            }
+
+    .btn {
+        display: block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        text-align: center;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Leaves</a> >
+    <span>Leave Details</span>
+</div>
+
+<h1>Leave Details</h1>
+
+<div class="details-container">
+    <h2>Leave# @Model.Leave.LeaveId</h2>
+    <p>Below are the details for the selected leave:</p>
+
+    <table>
+        <tr>
+            <td>Leave Type:</td>
+            <td>@Model.Leave.LeaveType</td>
+        </tr>
+        <tr>
+            <td>Start Date:</td>
+            <td>@Model.Leave.StartDate</td>
+        </tr>
+        <tr>
+            <td>End Date:</td>
+            <td>@Model.Leave.EndDate</td>
+        </tr>
+        <tr>
+            <td>Assignee:</td>
+            <td>@Model.Leave.AssigneeName</td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>@Model.Leave.Status</td>
+        </tr>
+    </table>
+
+    <a class="btn" asp-page="Edit" asp-route-id="@Model.Leave.LeaveId">Approve Leave</a>
+</div>

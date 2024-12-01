@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Application\TMS_2.Application.csproj" />
+    <ProjectReference Include="..\TMS.Common\TMS_0.Common.csproj" />
+    <ProjectReference Include="..\TMS.Domain\TMS_1.Domain.csproj" />
+    <ProjectReference Include="..\TMS.Infrastructure\TMS_4.Infrastructure.csproj" />
+    <ProjectReference Include="..\TMS.Persistence\TMS_3.Persistence.csproj" />
+    <ProjectReference Include="..\TMS.WebUI\TMS_5.WebUI.csproj" />
+  </ItemGroup>
+
+</Project>

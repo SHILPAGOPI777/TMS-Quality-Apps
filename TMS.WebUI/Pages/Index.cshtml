@@ -1,0 +1,78 @@
+﻿@page
+@model TMS.WebUI.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    var backgroundColor = "#cfcfcf";
+}
+
+<style>
+    body {
+        background-color:@backgroundColor;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+    }
+
+    .container {
+        display: flex;
+        height: 100vh;
+    }
+
+    .sidebar {
+        width: 20%;
+        background-color: #001f4d;
+        padding: 1rem;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        height: 100vh; /* Sidebar covers the full viewport height */
+    }
+
+    .dashboard {
+        flex-grow: 1;
+        padding: 2rem;
+        display: flex;
+        align-items: flex-start; /* Align content to the top */
+        justify-content: flex-start; /* Align content to the left */
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%; /* Ensures buttons align properly */
+        max-width: 300px; /* Limit button container width */
+    }
+
+        .button-container a {
+            display: block; /* Ensure buttons stack vertically */
+            text-align: center;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+            .button-container a:hover {
+                background-color: #004d99;
+            }
+</style>
+
+<div class="container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <div class="button-container">
+            <a href="/Issues">Issues</a>
+            <a href="/Employees">Employees</a>
+            <a href="/Leave">Leaves</a>
+            <a href="/Projects">Projects</a> <!-- New Button Added -->
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div class="dashboard">
+        <!-- Dashboard content will go here -->
+    </div>
+</div>

@@ -1,0 +1,148 @@
+﻿@page
+@model TMS.WebUI.Issues.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+   
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    table.table {
+        width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .table th, .table td {
+        border: 1px solid #b7c1cb;
+        padding: 15px;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .table th {
+        background-color: #3f678f;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+
+    .table a {
+        color: #181a1b;
+        text-decoration: none;
+    }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+    /* Priority Colors */
+    .task-priority-High {
+        color: red;
+        font-weight: bold;
+    }
+
+    .task-priority-Medium {
+        color: orange;
+    }
+
+    .task-priority-Low {
+        color: green;
+    }
+
+    /* Status Colors */
+    .task-status-Open {
+        color: yellow;
+        font-weight: bold;
+    }
+
+    .task-status-Closed {
+        color: lightgreen;
+    }
+    .divwidth{
+        float:left;
+        width:100%;
+    }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <span>TASKS</span>
+</div>
+
+<!-- Positioned on top-right -->
+
+<h1 style="color: #3f678f">TASKS</h1>
+<div class="divwidth">
+    <a class="btn task-add noselect" asp-page="Create" style="float: right; background: #3f678f; color: #ffffff;">New Task</a>
+</div>
+<div class="divwidth">
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Assignee</th>
+            <th>Reporter</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+        @if (Model.IssueCatalog != null && Model.IssueCatalog.Count > 0)
+        {
+            foreach (var category in Model.IssueCatalog)
+            {
+                @if (category.Value != null && category.Value.Count() > 0)
+                {
+                    <tr>
+                        <td class="font-weight-bold text-center" colspan="5" style="background-color: #0165c9; color: #ffffff;">@category.Key</td>
+                    </tr>
+                    foreach (var issue in category.Value)
+                    {
+                        <tr>
+                            <td><a asp-page="Detailed" asp-route-id="@issue.Id">@issue.Name</a></td>
+                            <td>@issue.AssigneeName</td>
+                            <td>@issue.ReporterName</td>
+                            <td class="task-priority-@issue.PriorityName">@issue.PriorityName</td>
+                            <td class="task-status-@issue.StatusName">@issue.StatusName</td>
+                        </tr>
+                    }
+                }
+            }
+        }
+    </table>
+</div>

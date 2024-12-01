@@ -1,0 +1,136 @@
+﻿@page
+@using TMS.WebUI.Common
+@model TMS.WebUI.Issues.EditModel
+@{
+    ViewData["Title"] = "Edit Issue";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        margin-bottom: 20px;
+    }
+
+        .breadcrumbs a {
+            color: #87CEFA; /* Light blue links */
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: white;
+        }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 20px;
+        background-color: #001f4d;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group span {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+    .btn {
+        display: inline-block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+
+    .btn-remove {
+        background-color: #cc0000; /* Red for delete */
+    }
+
+        .btn-remove:hover {
+            background-color: #990000;
+        }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Issues</a> >
+    <span>@Model.Issue.Name [Edit Mode]</span>
+</div>
+
+<h1>Edit Issue: @Model.Issue.Name</h1>
+
+<form asp-page="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Issue.Name"></label>
+        <input name="Name" asp-for="Issue.Name" class="form-control" value="@Model.Issue.Name" />
+        <span asp-validation-for="Issue.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Issue.Description"></label>
+        <input name="Description" asp-for="Issue.Description" class="form-control" value="@Model.Issue.Description" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Issue.AssigneeId"></label>
+        <select name="AssigneeId" asp-for="Issue.AssigneeId" asp-items="@Model.Issue.Employees.ToSelectList(Model.Issue.AssigneeId)"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Issue.ReporterId"></label>
+        <select name="ReporterId" asp-for="Issue.ReporterId" asp-items="@Model.Issue.Employees.ToSelectList(Model.Issue.ReporterId)"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Issue.Priority"></label>
+        <select name="Priority" asp-for="Issue.Priority" asp-items="@Model.Issue.IssuePriorityLevels.ToSelectList(Model.Issue.Priority)"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Issue.Status"></label>
+        <select name="Status" asp-for="Issue.Status" asp-items="@Model.Issue.IssueStatuses.ToSelectList(Model.Issue.Status)"></select>
+    </div>
+    <input name="Id" id="Update_Id" asp-for="Issue.Id" hidden />
+    <input class="btn" type="submit" value="Update" />
+</form>
+
+<form asp-page="Edit" method="post">
+    <input name="Id" id="Delete_Id" asp-for="Issue.Id" hidden />
+    <input class="btn btn-remove" type="submit" value="Remove" asp-page-handler="Delete" />
+</form>

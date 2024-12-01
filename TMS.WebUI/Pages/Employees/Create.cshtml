@@ -1,0 +1,146 @@
+﻿@page
+@using TMS.WebUI.Common
+@model TMS.WebUI.Employees.CreateModel
+@{
+    ViewData["Title"] = "Add Employee";
+}
+
+<style>
+    body {
+        background-color: #cdcdcd;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .breadcrumbs {
+        font-size: 1rem;
+    }
+
+        .breadcrumbs a {
+            color: #004875;
+            text-decoration: none;
+        }
+
+            .breadcrumbs a:hover {
+                text-decoration: underline;
+            }
+
+        .breadcrumbs span {
+            color: #0165c9;
+        }
+
+
+
+    .btn:hover {
+        background-color: #004d99;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    form {
+        background-color: #001f4d; /* Slightly darker blue for contrast */
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #87CEFA;
+        border-radius: 5px;
+        background-color: #001a33;
+        color: white;
+    }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4CAF50; /* Green outline on focus */
+        }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .text-danger {
+        color: #FF4500; /* Bright red for error messages */
+        font-size: 0.9rem;
+    }
+
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #87CEFA;
+        border-radius: 5px;
+        background-color: #001a33;
+        color: white;
+    }
+
+    .btn {
+        display: block;
+        background-color: #0066cc;
+        color: white;
+        text-decoration: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+        .btn:hover {
+            background-color: #004d99;
+        }
+</style>
+
+<div class="breadcrumbs">
+    <a asp-page="../Index">Home</a> >
+    <a asp-page="Index">Employees</a> >
+    <span>Add Employee</span>
+</div>
+
+<h1 style="color: #3f678f">Add Employee</h1>
+
+<form asp-page="Create" method="post">
+    <div>
+        <label asp-for="Employee.ShortName" class="control-label">Short Name</label>
+        <input name="ShortName" asp-for="Employee.ShortName" class="form-control" placeholder="Enter short name" />
+        <span asp-validation-for="Employee.ShortName" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Employee.FullName" class="control-label">Full Name</label>
+        <input name="FullName" asp-for="Employee.FullName" class="form-control" placeholder="Enter full name" />
+        <span asp-validation-for="Employee.FullName" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Employee.Email" class="control-label">Email</label>
+        <input name="Email" asp-for="Employee.Email" class="form-control" placeholder="Enter email address" />
+        <span asp-validation-for="Employee.Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Employee.Password" class="control-label">Password</label>
+        <input type="password" name="Password" asp-for="Employee.Password" class="form-control" placeholder="Enter password" />
+        <span asp-validation-for="Employee.Password" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Employee.Role" class="control-label">Role</label>
+        <select name="Role" asp-for="Employee.Role" asp-items="@Model.Employee.UserRoles.ToSelectList()" class="form-control">
+            <option value="">-- Select Role --</option>
+        </select>
+        <span asp-validation-for="Employee.Role" class="text-danger"></span>
+    </div>
+    <input class="btn" type="submit" value="Add Employee" />
+</form>
